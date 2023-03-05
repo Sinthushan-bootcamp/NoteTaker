@@ -21,6 +21,11 @@ To install necessary dependencies, run the following command:
 npm i
 ```
 ## Usage
+
+You can find the deployed application [here](https://murmuring-mesa-24022.herokuapp.com/)
+
+or
+
 First clone the repo and from the command line CD into the directory. Once in the directory follow the [install instructions](#installation) and then run either one of the following commands
 
 Use your own Port:
