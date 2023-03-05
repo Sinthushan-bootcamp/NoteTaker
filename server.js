@@ -20,7 +20,6 @@ app.get('/notes', (req, res) =>
 );
 
 app.get('/api/notes', (req, res) => {
-    console.log('was called');
     fs.readFile('./db/db.json', function read(err, data) {
         if (err) {
             res.err('file missing');
@@ -50,11 +49,23 @@ app.post('/api/notes', (req, res) => {
             };
             parsedData.push(content);
             fs.writeFile('./db/db.json', JSON.stringify(parsedData), (err) =>
-            err ? res.error('Error in adding note') : res.json(`Added note`)
-          );
+                err ? res.error('Error in adding note') : res.json('Added note')
+            );
         }
     });
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+    fs.readFile('./db/db.json', function read(err, data) {
+        if (err) {
+            res.err('file missing');
+        }
+        const notes = JSON.parse(data);
+        newNotes = notes.filter(note => note.id != req.params.id)
+        fs.writeFile('./db/db.json', JSON.stringify(newNotes), (err) =>
+            err ? res.error('Error in removing note') : res.json('Note Removed')
+        );
+    });
+})
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
